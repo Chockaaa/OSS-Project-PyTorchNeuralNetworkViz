@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { ServerApiVersion } = require('mongodb');
 
 require('dotenv').config();
 
@@ -14,12 +14,20 @@ app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
 
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
-client.connect(err => {
-  const collection = client.db("InternshipTracker").collection("UserData");
-  // perform actions on the collection object
-  client.close();
-});
+mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true, ServerApi: ServerApiVersion.v1});
+const connection = mongoose.connection;
+connection.once('open', () => {console.log("MongoDB database connection established successfully");})
+
+
+const internshipsRouter = require('./routes/internships');
+const usersRouter = require('./routes/users');
+
+app.use('/internships', require('./routes/internships'));
+app.use('/users', require('./routes/users'));
+
+
+
+
 
 
 app.listen(port, () => {
