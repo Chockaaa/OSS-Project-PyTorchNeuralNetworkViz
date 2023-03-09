@@ -22,12 +22,8 @@ connection.once('open', () => {console.log("MongoDB database connection establis
 const internshipsRouter = require('./routes/internships');
 const usersRouter = require('./routes/users');
 
-app.use('/internships', require('./routes/internships'));
-app.use('/users', require('./routes/users'));
-
-
-
-
+app.use('/internships', internshipsRouter);
+app.use('/users', usersRouter);
 
 
 app.listen(port, () => {

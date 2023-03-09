@@ -1,9 +1,8 @@
 const router = require('express').Router();
-const Internship = require('../models/internship.model');
-let internships = require('../models/internship.model');
+let Internship = require('../models/internship.model');
 
 router.route('/').get((req, res) => {
-    internships.find()
+    Internship.find()
         .then(internships => res.json(internships))
         .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -19,7 +18,7 @@ router.route('/addInternship').post((req, res) => {
 
     
 
-    const newInternship = new internships({
+    const newInternship = new Internship({
         username,
         company,
         period,
