@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-
+import OutputDisplay from './OutputDisplay'
 function TextBoxForm(){
   
   const [code, setCode] = useState("")
@@ -12,12 +12,15 @@ function TextBoxForm(){
     setCode("")
   }
   return (
+    <div>
     <div className='text-container' onSubmit={handleSubmit}>
         <p style={{color:"white", textAlign:"left"}}>Enter your code here :</p>    
         <div className='textbox'>
             <textarea value={code} onChange={handleChange}></textarea>
         </div>  
-        <button className='submit-btn'>Submit</button>
+        <button className='submit-btn'>Generate</button>
+    </div>
+    <OutputDisplay />
     </div>
   )
 }

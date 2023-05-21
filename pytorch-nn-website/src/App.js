@@ -9,7 +9,6 @@ function App() {
     <div className="background">
       <h1 className="header">Neural Network Image Generator</h1>
         <ToggleSwitch />
-        <OutputDisplay />
       </div>
   );
 }

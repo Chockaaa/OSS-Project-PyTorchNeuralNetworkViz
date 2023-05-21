@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import OutputDisplay from './OutputDisplay';
 
 function CustomiseForm(){
     
@@ -24,13 +25,29 @@ function CustomiseForm(){
       layer_list[index][name] = value;
       setLayer(layer_list);
     }
-  
+
+    //Generate button click
+    const [click, setClick] = useState(false)
+    const handleSubmitClick = () =>{
+      setClick(true)
+      // setTimeout(() => {
+      //   setClick(false)},
+      //   2000)
+      }
+
     const handleFormSubmit=(e)=>{
       e.preventDefault();
       const outputData =layer.map((singleLayer)=>singleLayer.layer);
       setOutput(outputData);
+      handleSubmitClick();
     }
     
+    const handleOutput = (array) => {
+      let concatString = ""
+      array.length > 0 ? concatString = array.join(',') : concatString = ""
+      return concatString;
+    }
+
     return(
     <div>
         <form className="form" >
@@ -68,19 +85,19 @@ function CustomiseForm(){
 
             ))}
             
-        
-            <button type='button' className='submit-btn' onClick={handleFormSubmit}><span>Submit</span></button>
+            <button type='button' className='submit-btn' onClick={handleFormSubmit}>
+                <span>Generate</span>
+            </button>
+
+            {click ? 
+              (output['0']!='' ? <OutputDisplay code={'Layers ='+ handleOutput(output)}/> 
+              : <p style={{textAlign: "center", color: "white"}}>You need to select the number of layers</p>) 
+              : ""}
+            
 
         </form>
-        {/* <h2 className='Output'>Output</h2> */}
-
-        {/* <div className="Output-background">
-              {output.length>0 && (
-                <div className='output-layer'>
-                  layers=[{output.join(',')}]
-                  </div>
-              )}
-         </div> */}
+        
+         
     </div> 
 )
 }
