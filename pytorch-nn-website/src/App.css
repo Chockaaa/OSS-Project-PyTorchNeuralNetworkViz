@@ -51,6 +51,10 @@ textarea{
   width:500px;
 
 }
+
+.Output-container{
+  padding-bottom: 50px;
+}
 .Output{
   color:aliceblue;
   text-align: center;
@@ -60,7 +64,9 @@ textarea{
 
 .Output-background{
   background-color: lightgrey;
-  padding:20px;
+  padding:10px;
+  padding-left: 20px;
+  padding-right: 20px;
   border-radius:5px;
   box-shadow: grey;
   margin-left:auto;

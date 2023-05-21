@@ -88,12 +88,13 @@ function CustomiseForm(){
             <button type='button' className='submit-btn' onClick={handleFormSubmit}>
                 <span>Generate</span>
             </button>
-
+           
+            <div className='Output-container'>
             {click ? 
-              (output['0']!='' ? <OutputDisplay code={'Layers ='+ handleOutput(output)}/> 
+              (output['0']!='' ? <OutputDisplay code={'Layers = '+ handleOutput(output)}/> 
               : <p style={{textAlign: "center", color: "white"}}>You need to select the number of layers</p>) 
               : ""}
-            
+            </div>
 
         </form>
         

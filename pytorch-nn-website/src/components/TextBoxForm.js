@@ -6,21 +6,29 @@ function TextBoxForm(){
   function handleChange(event){
     setCode(event.target.value)
   }
+
+  const [click, setClick] = useState(false)
+  const [output, setOutput] = useState("")
   function handleSubmit(event){
     event.preventDefault()
-    console.log(event.target.value)
-    setCode("")
+    setClick(true)
+    setOutput(code)
   }
   return (
     <div>
-    <div className='text-container' onSubmit={handleSubmit}>
-        <p style={{color:"white", textAlign:"left"}}>Enter your code here :</p>    
-        <div className='textbox'>
-            <textarea value={code} onChange={handleChange}></textarea>
-        </div>  
-        <button className='submit-btn'>Generate</button>
-    </div>
-    <OutputDisplay />
+      <div className='text-container'>
+          <p style={{color:"white", textAlign:"left"}}>Paste your code here :</p>    
+          <div className='textbox'>
+              <textarea value={code} onChange={handleChange}></textarea>
+          </div>  
+          <button className='submit-btn' onClick={handleSubmit}>Generate</button>
+      </div>
+      <div className='Output-container'>
+        {click ? 
+          output!='' ? <OutputDisplay code = {output} /> 
+          : <p style={{textAlign: "center", color: "white"}}>You need to copy and paste your code above</p>
+        : ""}
+      </div>
     </div>
   )
 }
