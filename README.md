@@ -1,1 +1,4 @@
 # InternshipTracker
+
+
+.\venv\Scripts\activate     
