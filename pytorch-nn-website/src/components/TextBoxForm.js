@@ -19,7 +19,9 @@ function TextBoxForm(){
       <div className='text-container'>
           <p style={{color:"white", textAlign:"left"}}>Paste your code here :</p>    
           <div className='textbox'>
-              <textarea value={code} onChange={handleChange}></textarea>
+              <textarea value={code} onChange={handleChange} 
+              placeholder='e.g. model = nn.Sequential(nn.Conv2d(1,20,5), nn.ReLU(), nn.Conv2d(20,64,5), nn.ReLU())'>
+              </textarea>
           </div>  
           <button className='submit-btn' onClick={handleSubmit}>Generate</button>
       </div>
