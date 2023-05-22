@@ -64,9 +64,10 @@ function CustomiseForm(){
                   <div className='dropdown-container'>
                     <label>Select Layer Type</label>
                     <Dropdown options={[
-                      {value:'ReLu', label: 'ReLu'},
-                      {value: 'Convo2d', label: 'Convo2d'},
-                      {value: 'pool2d', label: 'pool2d'}]}/>
+                      {value:'ReLU', label: 'ReLU'},
+                      {value: 'Convo2d', label: 'Convolution'},
+                      {value: 'MaxPool2d', label: 'Pooling'},
+                      {value: "Linear", label: "Linear"}]}/>
                   </div>
 
                   <label htmlFor="no_neurons" className='no_neurons'>

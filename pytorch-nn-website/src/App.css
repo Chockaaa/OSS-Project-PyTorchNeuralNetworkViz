@@ -61,7 +61,14 @@ label{
   background-color: white;
   padding: 15px;
 }
-.dropdown-bar{
+
+select{
+  margin-top: 10px;
+  width: 465px;
+  height: 30px;
+}
+
+/* .dropdown-bar{
   background-color: lightgrey;
   border-style: solid;
   border-color: lightgrey;
@@ -71,19 +78,21 @@ label{
   justify-content: space-between;
   padding-right: 10px;
   height: 30px;
-}
+  cursor: pointer;
+} */
 
-.dropdown-menu{
+/* .dropdown-menu{
   width: auto;
   user-select: none;
   cursor: pointer;
   border-style: solid;
   border-color: lightgray;
-}
+} */
 
 .dropdown-item{
   cursor: pointer;
-  padding: 5px;
+  padding: 10px;
+  font-size: 15px;
 }
 
 .Output-container{
