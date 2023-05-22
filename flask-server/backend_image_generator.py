@@ -82,7 +82,7 @@ class NeuralNetworkGenerator:
 
 
 layers = [8, 8, 8, 1]  # Example of number of nodes in each layer
-perspective = 'top'  # Example of perspective for the visualization
+perspective = 'left'  # Example of perspective for the visualization
 
 if __name__ == '__main__':
     generator = NeuralNetworkGenerator()
