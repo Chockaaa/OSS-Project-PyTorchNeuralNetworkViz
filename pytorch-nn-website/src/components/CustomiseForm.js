@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import OutputDisplay from './OutputDisplay';
+import Dropdown from './Dropdown';
 
 function CustomiseForm(){
     
@@ -59,14 +60,22 @@ function CustomiseForm(){
                 <label htmlFor="Layer" className='label'>Layer {index+1}
                 </label>
                 <div>
-                
-                <label htmlFor="no_neurons" className='no_neurons'>
-                    Number of Neurons:  </label>
 
-                <input type='number' name='layer' className='input'
-                    value={singleLayer.no_neurons}
-                    onChange={(e)=>handleLayerChange(e,index)}
-                />
+                  <div className='dropdown-container'>
+                    <label>Select Layer Type</label>
+                    <Dropdown options={[
+                      {value:'ReLu', label: 'ReLu'},
+                      {value: 'Convo2d', label: 'Convo2d'},
+                      {value: 'pool2d', label: 'pool2d'}]}/>
+                  </div>
+
+                  <label htmlFor="no_neurons" className='no_neurons'>
+                      Number of Neurons:  </label>
+
+                  <input type='number' name='layer' className='input'
+                      value={singleLayer.no_neurons}
+                      onChange={(e)=>handleLayerChange(e,index)}
+                  />
                     
                     {layer.length>1 && 
                     <button type='button' className='remove-btn' onClick={()=>handleLayerRemove(index)}>
@@ -84,7 +93,6 @@ function CustomiseForm(){
             </div>  
 
             ))}
-            
             <button type='button' className='submit-btn' onClick={handleFormSubmit}>
                 <span>Generate</span>
             </button>

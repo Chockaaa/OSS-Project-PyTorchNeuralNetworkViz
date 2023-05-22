@@ -35,6 +35,11 @@ textarea{
   border-color: rgba(255, 255, 255, 0);
 }
 
+label{
+  font-size: 16px;
+  font-weight: bold;
+}
+
 .textbox{
   justify-content: center;
   display: flex;
@@ -50,6 +55,35 @@ textarea{
   margin-right: auto;
   width:500px;
 
+}
+
+.dropdown-container{
+  background-color: white;
+  padding: 15px;
+}
+.dropdown-bar{
+  background-color: lightgrey;
+  border-style: solid;
+  border-color: lightgrey;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 10px;
+  height: 30px;
+}
+
+.dropdown-menu{
+  width: auto;
+  user-select: none;
+  cursor: pointer;
+  border-style: solid;
+  border-color: lightgray;
+}
+
+.dropdown-item{
+  cursor: pointer;
+  padding: 5px;
 }
 
 .Output-container{
@@ -83,6 +117,7 @@ textarea{
 .no_neurons{
   font-size: 16px;
   font-weight:bold;
+  padding-left: 15px;
 }
 
 .box{
