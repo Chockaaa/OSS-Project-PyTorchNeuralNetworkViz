@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-function Dropdown({options}){
+function Dropdown({options, selectOption}){
     /*options: an array of options for the dropdown*/
-   const [layer, setLayer] = useState("")
+  //  const [layer, setLayer] = useState("")
    const selectLayer = (e) => {
     let idx = e.target.selectedIndex;
-    setLayer(e.target.options[idx].value);
+    selectOption(options[idx].value);
+    // setLayer(e.target.options[idx].value);
     }
 
    return (
