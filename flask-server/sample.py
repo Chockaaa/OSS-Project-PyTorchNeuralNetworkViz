@@ -3,7 +3,6 @@ import torch.nn as nn
 import matplotlib.pyplot as plt
 import numpy as np
 
-fig, ax = plt.subplots()
 
 
 layers  = nn.Sequential(
