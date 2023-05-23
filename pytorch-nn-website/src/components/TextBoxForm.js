@@ -14,19 +14,19 @@ function TextBoxForm(){
   const [output, setOutput] = useState("")
   function handleSubmit(event){
     event.preventDefault()
-
+    setClick(true)
+    setOutput(code)
     //put in the fetch function to send the data to a json file
-    axios.post('/myserver.endpoint', {
+    //TODO: net:Error because the flask-server file is not in this folder directory
+    axios.post('http://localhost:5000', {
       // Add parameters here
       mode: "TextEditor",
-      body: code,
+      body: output,
 
     })
     .then((response) => {
       console.log(response.data);
-        // Handle data
-        setClick(true)
-        setOutput(code)
+
     })
     .catch((error) => {
       console.log(error);
