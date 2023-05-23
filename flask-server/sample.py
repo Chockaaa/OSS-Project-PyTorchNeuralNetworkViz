@@ -23,7 +23,7 @@ for layer in layers :
 
 
 # Define the architecture of the neural network
-layers = [8, 8, 8, 1]  # Number of nodes in each layer
+layers = [8, 8, 2]  # Number of nodes in each layer
 
 # Calculate the offset for centering the circles within each layer
 offsets = [nodes / 2 - 0.5 for nodes in layers]
@@ -46,8 +46,8 @@ for layer, nodes in enumerate(layers):
     y_positions[-nodes:] = np.array(y_positions[-nodes:]) - offsets[layer]
 
 # Color the first layer differently
-c = ['blue'] * layers[0] + ['gray'] * layers[1] + ['gray'] * layers[2] + ['blue'] * layers[3]
-ax.scatter(x_positions, y_positions, z_positions, s=50, c=c)
+#c = ['blue'] * layers[0] + ['gray'] * layers[1] + ['gray'] * layers[2] + ['blue'] * layers[3]
+ax.scatter(x_positions, y_positions, z_positions, s=50)
 
 # Plot the connections between nodes
 for i in range(len(layers) - 1):
