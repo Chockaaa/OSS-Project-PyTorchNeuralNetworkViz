@@ -39,7 +39,6 @@ def generate_image():
     # End of Image Generation function
         
 
-    image_path = '../helloworld.png'
     return send_file(image_path, mimetype='image/png')
 
 
