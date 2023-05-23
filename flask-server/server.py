@@ -2,7 +2,7 @@
 
 from flask import Flask, jsonify, send_file,request
 from ImageGeneratorSupportCode import *
-from backend_image_generator import *
+from backend_image_generator import NeuralNetworkGenerator
 
 app = Flask(__name__)
 
@@ -30,10 +30,12 @@ def generate_image():
 
 
     # GenerateImage Function
-    print(ImageViewingAngle)
-    print(layer_names)
-    print(num_neurons)
+    generator = NeuralNetworkGenerator()
+    image_path = generator.generate_neural_network(layer_names, num_neurons, ImageViewingAngle)
 
+    if image_path is None:
+        # Handle error condition
+        return {'error': 'Unable to generate the neural network image.'}
     # End of Image Generation function
         
 
