@@ -18,11 +18,11 @@ function TextBoxForm(){
     setOutput(code)
     //put in the fetch function to send the data to a json file
     //TODO: net:Error because the flask-server file is not in this folder directory
-    axios.post('http://localhost:5000', {
+    axios.post('http://127.0.0.1:5000/generate_image', {
       // Add parameters here
-      mode: "TextEditor",
-      body: output,
-
+      modelInputversion: 1,
+      architecture: output,
+      view: "left",
     })
     .then((response) => {
       console.log(response.data);
@@ -45,7 +45,7 @@ function TextBoxForm(){
       </div>
       <div className='Output-container'>
         {click ? 
-          output!='' ? <OutputDisplay code = {output} /> 
+          output!=='' ? <OutputDisplay code = {output} /> 
           : <p style={{textAlign: "center", color: "white"}}>You need to copy and paste your code above</p>
         : ""}
       </div>
