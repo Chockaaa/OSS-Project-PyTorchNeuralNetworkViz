@@ -16,22 +16,22 @@ function TextBoxForm(){
     event.preventDefault()
     setClick(true)
     setOutput(code)
-    //put in the fetch function to send the data to a json file
-    //TODO: net:Error because the flask-server file is not in this folder directory
-    axios.post('http://localhost:5000', {
-      // Add parameters here
-      mode: "TextEditor",
-      body: output,
+    console.log(code)
+    // axios.post('http://127.0.0.1:5000/generate_image', {
+    //   "modelInputversion": 2,
+    //   "architecture": "['Linear', 'ReLU', 'Linear', 'Tanh', 'Linear', 'Linear']",
+    //   "neurons":"[8, 0, 10, 0, 8, 2]",
+    //   "view": "right"
+    // })
+    // .then((response) => {
+    //   console.log(response.data);
 
-    })
-    .then((response) => {
-      console.log(response.data);
-
-    })
-    .catch((error) => {
-      console.log(error);
-    })
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // })
   }
+
   return (
     <div>
       <div className='text-container'>
@@ -45,7 +45,7 @@ function TextBoxForm(){
       </div>
       <div className='Output-container'>
         {click ? 
-          output!='' ? <OutputDisplay code = {output} /> 
+          output!=='' ? <OutputDisplay code = {output} /> 
           : <p style={{textAlign: "center", color: "white"}}>You need to copy and paste your code above</p>
         : ""}
       </div>

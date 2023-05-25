@@ -2,7 +2,6 @@ import React from 'react'
 import { useState } from 'react'
 import CustomiseForm from './CustomiseForm'
 import TextBoxForm from './TextBoxForm'
-import Dropdown from './Dropdown'
 
 function ToggleSwitch(){
     let [toggle, setToggle] = useState(true)
@@ -17,12 +16,12 @@ function ToggleSwitch(){
             </div>
             {toggle ? (
                 <div>
-                    <p style={{textAlign: "center", color: "white"}}>Content when user select "Text Editor"</p>
+                    {/* <p style={{textAlign: "center", color: "white"}}>Content when user select "Text Editor"</p> */}
                     <TextBoxForm />
                 </div>
             ) : (
                 <div>
-                    <p style={{textAlign: "center", color: "white"}}>Content when user select "Customise"</p>
+                    {/* <p style={{textAlign: "center", color: "white"}}>Content when user select "Customise"</p> */}
                     <CustomiseForm />
                 </div>
             )}
