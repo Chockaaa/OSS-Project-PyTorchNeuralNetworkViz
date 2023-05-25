@@ -1,5 +1,6 @@
 # .\venv\Scripts\activate
 
+import ast
 from flask import Flask, jsonify, send_file,request
 from ImageGeneratorSupportCode import *
 from backend_image_generator import NeuralNetworkGenerator
@@ -14,10 +15,11 @@ def test():
 def generate_image():
     data = request.get_json()
     modelInputversion = data['modelInputversion']
-    architecture = data['architecture']
-    ImageViewingAngle = data['view']
+    
 
     if modelInputversion == 1:
+        architecture = data['architecture']
+        ImageViewingAngle = data['view']
         layer_info = extract_layer_info(architecture)
         is_linear_activation = is_linear_activation_network(layer_info)
         if(is_linear_activation):
@@ -27,7 +29,11 @@ def generate_image():
             print(num_neurons)
         else:
             print("Not a linear activation network")
-
+    if modelInputversion == 2:
+       
+        layer_names = ast.literal_eval(data['architecture'])
+        num_neurons = ast.literal_eval(data['neurons'])
+        ImageViewingAngle = data['view']
 
     # GenerateImage Function
     generator = NeuralNetworkGenerator()
