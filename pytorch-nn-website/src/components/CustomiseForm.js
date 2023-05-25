@@ -86,9 +86,8 @@ function CustomiseForm(){
                     <Dropdown options={[
                       {value:'ReLU', label: 'ReLU'},
                       {value: 'Sigmoid', label: 'Sigmoid'},
-                      {value: 'Tanh', label: 'Tanh'},
-                      {value: "LeakyReLU", label: "LeakyReLU"},
-                      {value: "Softmax", label: "Softmax"},
+                      {value: 'TanH', label: 'TanH'},
+                      {value: "Leaky ReLU", label: "Leaky ReLU"},
                       {value: "Linear", label: "Linear"}
                       ]} selectOption={(e)=>handleSelectOption(e,index)}
                       />
