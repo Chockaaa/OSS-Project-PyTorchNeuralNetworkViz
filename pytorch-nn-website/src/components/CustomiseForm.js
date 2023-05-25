@@ -5,7 +5,7 @@ import Dropdown from './Dropdown';
 
 function CustomiseForm(){
     
-    const [layer,setLayer] = useState([{number_neurons:"", activation_function:"ReLU" }])
+    const [layer,setLayer] = useState([{number_neurons:0, activation_function:"ReLU" }])
     const[neuronLayer,setNeuronLayer] =useState([]);
     const[functionLayer,setFunctionLayer] =useState([]);
 
@@ -13,7 +13,7 @@ function CustomiseForm(){
     console.log(layer);
   
     const handleLayerAdd=()=>{
-      setLayer([...layer,{number_neurons:"", activation_function:"ReLU"}])
+      setLayer([...layer,{number_neurons:0, activation_function:"ReLU"}])
     }
   
     const handleLayerRemove=(index) =>{
@@ -41,9 +41,6 @@ function CustomiseForm(){
     const [click, setClick] = useState(false)
     const handleSubmitClick = () =>{
       setClick(true)
-      // setTimeout(() => {
-      //   setClick(false)},
-      //   2000)
       }
     const handleFormSubmit=(e)=>{
       e.preventDefault();
@@ -80,24 +77,28 @@ function CustomiseForm(){
                 <div>
 
                   <div className='dropdown-container'>
-                    <label>Select Activation Function</label>
+                    <label>Select Layer Type</label>
                     <Dropdown options={[
                       {value:'ReLU', label: 'ReLU'},
                       {value: 'Sigmoid', label: 'Sigmoid'},
-                      {value: 'TanH', label: 'TanH'},
-                      {value: "Leaky ReLU", label: "Leaky ReLU"},
-                      {value: "No Activation Function", label: "No Activation Function"}
+                      {value: 'Tanh', label: 'Tanh'},
+                      {value: "LeakyReLU", label: "LeakyReLU"},
+                      {value: "Softmax", label: "Softmax"},
+                      {value: "Linear", label: "Linear"}
                       ]} selectOption={(e)=>handleSelectOption(e,index)}
                       />
                   </div>
 
                   <label htmlFor="no_neurons" className='no_neurons'>
                       Number of Neurons:  </label>
-
+                  
+                  {layer['0']["activation_function"] == 'Linear' ? 
                   <input type='number' min="0" step="1" name='number_neurons' className='input'
                       value={singleLayer.number_neurons}
                       onChange={(value)=>handleLayerChange(value,index)}
-                  />
+                  /> : 
+                  <input type='number' value="0" name='number_neurons' className='input'/>
+                  }
                     
                     {layer.length>1 && 
                     <button type='button' className='remove-btn' onClick={()=>handleLayerRemove(index)}>
@@ -120,16 +121,14 @@ function CustomiseForm(){
             </button>
            
             <div className='Output-container'>
-            {click ? 
-              (neuronLayer['0']!='' ? 
+            {click ?  
               <OutputDisplay code={
                 <div> 
-                  {'Activation Function = ' + handleOutput(functionLayer)}
+                  {'Layers = ' + handleOutput(functionLayer)}
                   <br />
-                  {'Layers = ' +  handleOutput(neuronLayer)}
+                  {'Neurons = ' +  handleOutput(neuronLayer)}
                 </div>
-
-              }/>   : <p style={{textAlign: "center", color: "white"}}>You need to input at least 1 layer</p>)  : ""}
+              }/> : ""}
             </div>
 
         </form>
