@@ -59,8 +59,13 @@ function CustomiseForm(){
       console.log(array)
       let concatString = "[";
     
+      // if (array.length > 0) {
+      //   concatString += array.join(',');
+      // }
       if (array.length > 0) {
-        concatString += array.join(',');
+        concatString += array.map(item => {
+          return (/[0-9]/.test(item)) ? item : `"${item}"`;
+        }).join(', ');
       }
     
       concatString += "]";
@@ -80,13 +85,13 @@ function CustomiseForm(){
                 <div>
 
                   <div className='dropdown-container'>
-                    <label>Select Activation Function</label>
+                    <label>Select Layer Type</label>
                     <Dropdown options={[
                       {value:'ReLU', label: 'ReLU'},
                       {value: 'Sigmoid', label: 'Sigmoid'},
                       {value: 'TanH', label: 'TanH'},
                       {value: "Leaky ReLU", label: "Leaky ReLU"},
-                      {value: "No Activation Function", label: "No Activation Function"}
+                      {value: "Linear", label: "Linear"}
                       ]} selectOption={(e)=>handleSelectOption(e,index)}
                       />
                   </div>
@@ -124,7 +129,7 @@ function CustomiseForm(){
               (neuronLayer['0']!='' ? 
               <OutputDisplay code={
                 <div> 
-                  {'Activation Function = ' + handleOutput(functionLayer)}
+                  {'Architecture = ' + handleOutput(functionLayer)}
                   <br />
                   {'Layers = ' +  handleOutput(neuronLayer)}
                 </div>
