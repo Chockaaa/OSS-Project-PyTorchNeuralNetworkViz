@@ -43,8 +43,6 @@ def generate_image():
         # Handle error condition
         return {'error': 'Unable to generate the neural network image.'}
     # End of Image Generation function
-        
-
     return send_file(image_path, mimetype='image/png')
 
 

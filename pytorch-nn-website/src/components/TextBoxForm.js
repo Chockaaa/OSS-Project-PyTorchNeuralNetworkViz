@@ -16,9 +16,8 @@ function TextBoxForm(){
     event.preventDefault()
     setClick(true)
     setOutput(code)
-    //put in the fetch function to send the data to a json file
-    //TODO: net:Error because the flask-server file is not in this folder directory
-    axios.post('http://127.0.0.1:5000/generate_image', {
+
+    axios.post('http://localhost:5000/generate_image', {
       // Add parameters here
       modelInputversion: 1,
       architecture: output,
