@@ -57,15 +57,30 @@ label{
 
 }
 
-.dropdown-container{
+.layer-dropdown-container{
   background-color: white;
-  padding: 15px;
+  padding: 10px;
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+.view-dropdown-container{
+  background-color: white;
+  padding: 20px;
+  width: 500px;
+  margin-left: auto;
+  margin-top: 10px;
+  margin-right: auto;
+  border-radius:3px;
+
+}
+
 
 select{
   margin-top: 10px;
   width: 465px;
-  height: 30px;
+  height: px;
 }
 
 /* .dropdown-bar{

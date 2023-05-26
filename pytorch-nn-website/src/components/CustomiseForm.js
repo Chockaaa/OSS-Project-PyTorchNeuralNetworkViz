@@ -8,6 +8,7 @@ function CustomiseForm(){
     const [layer,setLayer] = useState([{number_neurons:0, activation_function:"ReLU" }])
     const[neuronLayer,setNeuronLayer] =useState([]);
     const[functionLayer,setFunctionLayer] =useState([]);
+    const [view, setView] = useState("left");
 
 
     console.log(layer);
@@ -81,7 +82,7 @@ function CustomiseForm(){
                 </label>
                 <div>
 
-                  <div className='dropdown-container'>
+                  <div className='layer-dropdown-container'>
                     <label>Select Layer Type</label>
                     <Dropdown options={[
                       {value:'ReLU', label: 'ReLU'},
@@ -120,6 +121,17 @@ function CustomiseForm(){
             </div>  
 
             ))}
+            <div className='view-dropdown-container'>
+              <label>Select View:</label>
+              <Dropdown
+                options={[
+                  { value: 'left', label: 'Left' },
+                  { value: 'top', label: 'Top' },
+                  { value: 'right', label: 'Right' }
+                ]}
+                selectOption={(e) => setView(e)}
+              />
+            </div>
             <button type='button' className='submit-btn' onClick={handleFormSubmit}>
                 <span>Generate</span>
             </button>
@@ -128,9 +140,11 @@ function CustomiseForm(){
             {click ?  
               <OutputDisplay code={
                 <div> 
-                  {'Architecture = ' + handleOutput(functionLayer)}
+                  {'Architecture : ' + handleOutput(functionLayer)}
                   <br />
-                  {'Neurons = ' +  handleOutput(neuronLayer)}
+                  {'Neurons : ' +  handleOutput(neuronLayer)}
+                  <br />
+                  {"View: " + JSON.stringify([view])}
                 </div>
               }/> : ""}
             </div>
