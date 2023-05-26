@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')  # Use the Agg backend
-
+import random
 
 class NeuralNetworkGenerator:
     def __init__(self):
@@ -18,9 +18,6 @@ class NeuralNetworkGenerator:
             'Tanh': 'orange',
             'Softmax': 'yellow'}
         self.used_colors = set()
-        self.available_colors = [
-            'magenta', 'cyan', 'darkviolet', 'darkgreen', 'darkorange', 'gold', 'hotpink', 'saddlebrown', 'springgreen', 'coral'
-        ]
 
     def generate_neural_network_route(self):
         # Generate the neural network image
@@ -89,6 +86,9 @@ class NeuralNetworkGenerator:
         else:
             node_size = 500 / max_neurons
             line_width = 3.0 / max_neurons
+        if len(num_neurons) > 8:
+            node_size = 1100 / node_size
+            line_width /= 1.8
 
         ax.scatter(x_positions, y_positions, z_positions, s=node_size, c=node_colors)
 
@@ -142,10 +142,24 @@ class NeuralNetworkGenerator:
         return None
 
     def get_unique_color(self):
-        for color in self.available_colors:
-            if color not in self.used_colors and color not in self.layer_colors.values():
+        max_attempts = 100  # Maximum number of attempts to find a unique color
+        attempts = 0
+
+        while attempts < max_attempts:
+            red = random.randint(0, 255)
+            green = random.randint(0, 255)
+            blue = random.randint(0, 255)
+
+            color = "#{:02x}{:02x}{:02x}".format(red, green, blue)
+
+            restricted_colors = list(self.layer_colors.values())
+
+
+            if color not in self.used_colors and color not in restricted_colors:
                 self.used_colors.add(color)
                 return color
+
+            attempts += 1
 
     def run(self):
         self.app.run()
