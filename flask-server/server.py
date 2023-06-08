@@ -1,6 +1,7 @@
 # .\venv\Scripts\activate
 
 import ast
+import io
 from flask import Flask, jsonify, send_file,request
 from ImageGeneratorSupportCode import *
 from backend_image_generator import NeuralNetworkGenerator
@@ -43,7 +44,16 @@ def generate_image():
         # Handle error condition
         return {'error': 'Unable to generate the neural network image.'}
     # End of Image Generation function
-    return send_file(image_path, mimetype='image/png')
+
+
+     # Convert the image to a byte stream
+    image_bytes = io.BytesIO()
+    with open(image_path, 'rb') as image_file:
+        image_bytes.write(image_file.read())
+
+    # Send the image file as a response
+    image_bytes.seek(0)
+    return send_file(image_bytes, mimetype='image/png')
 
 
 if __name__ == '__main__':
