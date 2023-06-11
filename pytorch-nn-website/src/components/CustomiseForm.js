@@ -2,18 +2,20 @@ import React from 'react'
 import { useState } from 'react';
 import OutputDisplay from './OutputDisplay';
 import Dropdown from './Dropdown';
+import axios from 'axios';
+import {Base64} from 'js-base64'
+import {Buffer} from 'buffer';
+import { encodeURL } from 'js-base64';
 
 function CustomiseForm(){
     
-    const [layer,setLayer] = useState([{number_neurons:0, activation_function:"ReLU" }])
+    const [layer,setLayer] = useState([{number_neurons:"0", activation_function:"ReLU" }])
     const[neuronLayer,setNeuronLayer] =useState([]);
     const[functionLayer,setFunctionLayer] =useState([]);
-
-
-    console.log(layer);
+    const[resp, setResp] = useState("")
   
     const handleLayerAdd=()=>{
-      setLayer([...layer,{number_neurons:0, activation_function:"ReLU"}])
+      setLayer([...layer,{number_neurons:"0", activation_function:"ReLU"}])
     }
   
     const handleLayerRemove=(index) =>{
@@ -50,19 +52,54 @@ function CustomiseForm(){
       const outputFunctionData =layer.map((singleLayer)=>singleLayer.activation_function);
       setFunctionLayer(outputFunctionData);
       handleSubmitClick();
-    }
-    
-    const handleOutput = (array) => {
-      console.log(array)
-      let concatString = "[";
-    
-      if (array.length > 0) {
-        concatString += array.join(',');
+
+      axios.post('http://127.0.0.1:5000/generate_image', {
+      "modelInputversion": 2,
+      "architecture": "['Linear', 'ReLU', 'Linear', 'Tanh', 'Linear', 'Linear']",
+      "neurons":"[8, 0, 10, 0, 8, 2]",
+      "view": "right"
+    }, {
+      headers: {
+        "Content-Type": "application/json"
       }
-    
-      concatString += "]";
-      return concatString;
+    })
+    .then((response) => {
+      //PROBLEM: The decoding of response data into image format to display in frontend
+      var responseBlob = new Blob([response.data], {type:"image/png"});
+      console.log(response.img);
+      var reader = new window.FileReader();
+      reader.readAsDataURL(responseBlob); 
+      reader.onload = function() {
+        setResp(reader.result);
+      }
+       
+      // setResp({img:response.data})
+      // setResp(Buffer.from(response.data, 'binary').toString('base64'));
+      // setResp('data:image/png;base64,'+ Base64.encode(response.data));
+
+    })
+    .catch((error) => {
+      console.log(error);
+    })
     }
+    
+    // const handleOutput = ({functionLayer, neuronLayer}) => {
+    //   // console.log(array)
+    //   let concatString = "[";
+    //   let concatString2 = "[";
+    //   if (functionLayer.length > 0) {
+    //     concatString += functionLayer.join(',');
+    //   }
+    
+    //   concatString += "]";
+
+    //   if (neuronLayer.length > 0) {
+    //     concatString2 += neuronLayer.join(',');
+    //   }
+    
+    //   concatString2 += "]";
+    //   return ()
+    // }
 
     return(
     <div>
@@ -71,7 +108,6 @@ function CustomiseForm(){
             {layer.map((singleLayer,index)=>(
             <div className='form-group'>
             <div key={index} className='Layers'>
-
                 <label htmlFor="Layer" className='label'>Layer {index+1}
                 </label>
                 <div>
@@ -92,7 +128,7 @@ function CustomiseForm(){
                   <label htmlFor="no_neurons" className='no_neurons'>
                       Number of Neurons:  </label>
                   
-                  {layer['0']["activation_function"] == 'Linear' ? 
+                  {layer[index]["activation_function"] == 'Linear' ? 
                   <input type='number' min="0" step="1" name='number_neurons' className='input'
                       value={singleLayer.number_neurons}
                       onChange={(value)=>handleLayerChange(value,index)}
@@ -124,16 +160,17 @@ function CustomiseForm(){
             {click ?  
               <OutputDisplay code={
                 <div> 
-                  {'Layers = ' + handleOutput(functionLayer)}
+                  {/* {handleOutput(functionLayer, neuronLayer)} */}
+                  {/* {'Layers = ' + handleOutput(functionLayer)}
                   <br />
-                  {'Neurons = ' +  handleOutput(neuronLayer)}
+                  {'Neurons = ' +  handleOutput(neuronLayer)} */}
                 </div>
               }/> : ""}
             </div>
 
         </form>
-        
-         
+
+        <img src={resp}/>
     </div> 
 )
 }

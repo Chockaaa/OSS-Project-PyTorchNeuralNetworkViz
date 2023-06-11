@@ -17,19 +17,18 @@ function TextBoxForm(){
     setClick(true)
     setOutput(code)
     console.log(code)
-    // axios.post('http://127.0.0.1:5000/generate_image', {
-    //   "modelInputversion": 2,
-    //   "architecture": "['Linear', 'ReLU', 'Linear', 'Tanh', 'Linear', 'Linear']",
-    //   "neurons":"[8, 0, 10, 0, 8, 2]",
-    //   "view": "right"
-    // })
-    // .then((response) => {
-    //   console.log(response.data);
+    axios.post('http://127.0.0.1:5000/generate_image', {
+      "modelInputversion": 1,
+      "architecture": "model = nn.Sequential(nn.Conv2d(1,20,5), nn.ReLU(), nn.Conv2d(20,64,5), nn.ReLU())",
+      "view": "right"
+    })
+    .then((response) => {
+      console.log(response.data);
 
-    // })
-    // .catch((error) => {
-    //   console.log(error);
-    // })
+    })
+    .catch((error) => {
+      console.log(error);
+    })
   }
 
   return (
