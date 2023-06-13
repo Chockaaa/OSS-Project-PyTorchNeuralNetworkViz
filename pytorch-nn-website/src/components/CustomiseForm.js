@@ -3,17 +3,13 @@ import { useState } from 'react';
 import OutputDisplay from './OutputDisplay';
 import Dropdown from './Dropdown';
 import axios from 'axios';
-import {Base64} from 'js-base64'
-import {Buffer} from 'buffer';
-import { encodeURL } from 'js-base64';
 
 function CustomiseForm(){
     
     const [layer,setLayer] = useState([{number_neurons:"0", activation_function:"ReLU" }])
     const[neuronLayer,setNeuronLayer] =useState([]);
     const[functionLayer,setFunctionLayer] =useState([]);
-    const[resp, setResp] = useState("")
-  
+
     const handleLayerAdd=()=>{
       setLayer([...layer,{number_neurons:"0", activation_function:"ReLU"}])
     }
@@ -55,8 +51,8 @@ function CustomiseForm(){
 
       axios.post('http://127.0.0.1:5000/generate_image', {
       "modelInputversion": 2,
-      "architecture": "['Linear', 'ReLU', 'Linear', 'Tanh', 'Linear', 'Linear']",
-      "neurons":"[8, 0, 10, 0, 8, 2]",
+      "architecture": "['Linear', 'ReLU', 'Linear', 'Tanh', 'Linear', 'Linear', 'Linear']",
+      "neurons":"[8, 0, 10, 0, 8, 2, 5]",
       "view": "right"
     }, {
       headers: {
@@ -64,19 +60,7 @@ function CustomiseForm(){
       }
     })
     .then((response) => {
-      //PROBLEM: The decoding of response data into image format to display in frontend
-      var responseBlob = new Blob([response.data], {type:"image/png"});
-      console.log(response.img);
-      var reader = new window.FileReader();
-      reader.readAsDataURL(responseBlob); 
-      reader.onload = function() {
-        setResp(reader.result);
-      }
-       
-      // setResp({img:response.data})
-      // setResp(Buffer.from(response.data, 'binary').toString('base64'));
-      // setResp('data:image/png;base64,'+ Base64.encode(response.data));
-
+      console.log(response.data)
     })
     .catch((error) => {
       console.log(error);
@@ -158,19 +142,10 @@ function CustomiseForm(){
            
             <div className='Output-container'>
             {click ?  
-              <OutputDisplay code={
-                <div> 
-                  {/* {handleOutput(functionLayer, neuronLayer)} */}
-                  {/* {'Layers = ' + handleOutput(functionLayer)}
-                  <br />
-                  {'Neurons = ' +  handleOutput(neuronLayer)} */}
-                </div>
-              }/> : ""}
+              <OutputDisplay /> : ""}
             </div>
 
         </form>
-
-        <img src={resp}/>
     </div> 
 )
 }

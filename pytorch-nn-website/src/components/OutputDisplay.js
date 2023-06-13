@@ -1,25 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import DisplayImage from './DisplayImage'
 
-function OutputDisplay({code}){
+function OutputDisplay(){
   return (
     <div>
         <h2 className='output'>Output</h2>
         
-        <div className='Output-background'>
-          <p>{code}</p>
-        </div>
+        <DisplayImage />
+        
     </div>
   )
 }
-
-OutputDisplay.propTypes = {
-  code: PropTypes.string.isRequired
-}
-
-OutputDisplay.defaultProps = {
-  code: ""
-}
-
 
 export default OutputDisplay

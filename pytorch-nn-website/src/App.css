@@ -97,7 +97,10 @@ select{
 
 .Output-container{
   padding-bottom: 50px;
+  display: flex;
+  justify-content: center;
 }
+
 .Output{
   color:aliceblue;
   text-align: center;
@@ -105,23 +108,10 @@ select{
   font-weight:bold;
 }
 
-.Output-background{
-  background-color: lightgrey;
-  padding:10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  border-radius:5px;
-  box-shadow: grey;
-  margin-left:auto;
-  margin-right: auto;
-  width:500px;
-}
-
 .label{
   font-size: 20px;
   font-weight:bold;
 }
-
 
 .no_neurons{
   font-size: 16px;
