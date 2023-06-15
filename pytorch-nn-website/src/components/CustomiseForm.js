@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function CustomiseForm(){
     
-    const [layer,setLayer] = useState([{number_neurons:"0", activation_function:"ReLU" }])
+    const[layer,setLayer] = useState([{number_neurons:"0", activation_function:"ReLU" }])
     const[neuronLayer,setNeuronLayer] =useState([]);
     const[functionLayer,setFunctionLayer] =useState([]);
 
@@ -34,26 +34,44 @@ function CustomiseForm(){
       layer_list[index]['activation_function'] = value;
       setLayer(layer_list);
     }
+    const handleOutput = (array) => {
+      console.log(array)
+      let concatString = "[";
+
+      if (array.length > 0) {
+        concatString += array.map(item => {
+          return (/[0-9]/.test(item)) ? item : `"${item}"`;
+        }).join(', ');
+      }
+    
+      concatString += "]";
+      return concatString;
+    }
 
     //Generate button click
     const [click, setClick] = useState(false)
     const handleSubmitClick = () =>{
       setClick(true)
       }
+
     const handleFormSubmit=(e)=>{
       e.preventDefault();
       const outputNeuronsData =layer.map((singleLayer)=>singleLayer.number_neurons);
-      setNeuronLayer(outputNeuronsData);
+      setNeuronLayer(handleOutput(outputNeuronsData));
 
       const outputFunctionData =layer.map((singleLayer)=>singleLayer.activation_function);
-      setFunctionLayer(outputFunctionData);
+      setFunctionLayer(handleOutput(outputFunctionData));
+      
       handleSubmitClick();
 
       axios.post('http://127.0.0.1:5000/generate_image', {
       "modelInputversion": 2,
-      "architecture": "['Linear', 'ReLU', 'Linear', 'Tanh', 'Linear', 'Linear', 'Linear']",
-      "neurons":"[8, 0, 10, 0, 8, 2, 5]",
-      "view": "right"
+      // "architecture": "['Linear', 'ReLU', 'Linear', 'Tanh', 'Linear', 'Linear']",
+      // "neurons":"[8, 0, 10, 0, 8, 2]",
+      "architecture": functionLayer,
+      "neurons": neuronLayer,
+      "view": "right" 
+
     }, {
       headers: {
         "Content-Type": "application/json"
@@ -66,24 +84,6 @@ function CustomiseForm(){
       console.log(error);
     })
     }
-    
-    // const handleOutput = ({functionLayer, neuronLayer}) => {
-    //   // console.log(array)
-    //   let concatString = "[";
-    //   let concatString2 = "[";
-    //   if (functionLayer.length > 0) {
-    //     concatString += functionLayer.join(',');
-    //   }
-    
-    //   concatString += "]";
-
-    //   if (neuronLayer.length > 0) {
-    //     concatString2 += neuronLayer.join(',');
-    //   }
-    
-    //   concatString2 += "]";
-    //   return ()
-    // }
 
     return(
     <div>
@@ -112,7 +112,7 @@ function CustomiseForm(){
                   <label htmlFor="no_neurons" className='no_neurons'>
                       Number of Neurons:  </label>
                   
-                  {layer[index]["activation_function"] == 'Linear' ? 
+                  {layer[index]["activation_function"] === 'Linear' ? 
                   <input type='number' min="0" step="1" name='number_neurons' className='input'
                       value={singleLayer.number_neurons}
                       onChange={(value)=>handleLayerChange(value,index)}
@@ -142,7 +142,10 @@ function CustomiseForm(){
            
             <div className='Output-container'>
             {click ?  
-              <OutputDisplay /> : ""}
+              <div>
+                <OutputDisplay />
+              </div>  
+              : ""}
             </div>
 
         </form>

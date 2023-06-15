@@ -10,15 +10,14 @@ function TextBoxForm(){
   }
 
   const [click, setClick] = useState(false)
-  const [output, setOutput] = useState("")
   function handleSubmit(event){
     event.preventDefault()
     setClick(true)
-    setOutput(code)
+    setCode(code)
     console.log(code)
     axios.post('http://127.0.0.1:5000/generate_image', {
       "modelInputversion": 1,
-      "architecture": {code},
+      "architecture": code,
       // "architecture": "NeuralNetwork(\n  (flatten): Flatten(start_dim=1, end_dim=-1)\n  (linear_relu_stack): Sequential(\n    (0): Linear(in_features=64, out_features=64, bias=True)\n    (1): ReLU()\n    (2): Linear(in_features=16, out_features=16, bias=True)\n    (3): Tanh()\n    (4): Linear(in_features=8, out_features=2, bias=True)\n  )\n)",
       "view": "right"
     }, {
@@ -47,7 +46,7 @@ function TextBoxForm(){
       </div>
       <div className='Output-container'>
         {click ? 
-          output!=='' ? <OutputDisplay /> 
+          code!=='' ? <OutputDisplay /> 
           : <p style={{textAlign: "center", color: "white"}}>You need to copy and paste your code above</p>
         : ""}
       </div>
