@@ -5,8 +5,10 @@ import io
 from flask import Flask, jsonify, send_file,request
 from ImageGeneratorSupportCode import *
 from backend_image_generator import NeuralNetworkGenerator
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, origins='http://localhost:3000')
 
 @app.route('/test', methods=['GET'])
 def test():

@@ -16,12 +16,10 @@ function ToggleSwitch(){
             </div>
             {toggle ? (
                 <div>
-                    {/* <p style={{textAlign: "center", color: "white"}}>Content when user select "Text Editor"</p> */}
                     <TextBoxForm />
                 </div>
             ) : (
                 <div>
-                    {/* <p style={{textAlign: "center", color: "white"}}>Content when user select "Customise"</p> */}
                     <CustomiseForm />
                 </div>
             )}
