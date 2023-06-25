@@ -10,3 +10,30 @@ This is a web tool that combines Flask for backend development and React for fro
 
 
 ## Frontend UI
+
+##### Users can toggle between "Text Editor" and "Customisation" modes to generate the image
+
+### Text Editor Mode
+<p align="center">
+  <img src="images/homepage.png" width="640">
+  <p>Users can simply copy and paste their pytorch neural network code into the textbox</p>
+</p>
+
+### Customisation Mode
+<p align ="center">
+    <img src="images/customiseLayers.png" width="640">
+    <p>Users can select and customise the layers they want from scratch here as well</p>
+    <ul>For this project, we limited to only 2 types of layers: Linear and Activation Functions</ul>
+    <ul>5 Activation Functions:</ul>
+        <ol>ReLU</ol>
+        <ol>Sigmoid</ol>
+        <ol>Tanh</ol>
+        <ol>LeakyReLU</ol>
+        <ol>Softmax</ol>
+</p>
+
+### Output 
+<p align ="center">
+    <img src="images/customiseLayers.png" width="640">
+    <p>Upon pressing the "Generate" button, the neural network image will be displayed at the bottom of the page for users</p>
+</p>
