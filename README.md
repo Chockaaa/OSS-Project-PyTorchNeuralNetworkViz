@@ -28,6 +28,6 @@ This is a web tool that combines Flask for backend development and React for fro
 
 ### Output 
 <p align ="center">
-    <img src="images/customiseLayers.png" width="640">
+    <img src="images/outputpage.png" width="640">
     <p>Upon pressing the "Generate" button, the neural network image will be displayed at the bottom of the page for users</p>
 </p>
