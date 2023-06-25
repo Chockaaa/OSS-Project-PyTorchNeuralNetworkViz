@@ -11,7 +11,7 @@ This is a web tool that combines Flask for backend development and React for fro
 
 ## Frontend UI
 
-##### Users can toggle between "Text Editor" and "Customisation" modes to generate the image
+<p> Users can toggle between "Text Editor" and "Customisation" modes to generate the image </p>
 
 ### Text Editor Mode
 <p align="center">
@@ -23,13 +23,7 @@ This is a web tool that combines Flask for backend development and React for fro
 <p align ="center">
     <img src="images/customiseLayers.png" width="640">
     <p>Users can select and customise the layers they want from scratch here as well</p>
-    <ul>For this project, we limited to only 2 types of layers: Linear and Activation Functions</ul>
-    <ul>5 Activation Functions:</ul>
-        <ol>ReLU</ol>
-        <ol>Sigmoid</ol>
-        <ol>Tanh</ol>
-        <ol>LeakyReLU</ol>
-        <ol>Softmax</ol>
+    <p>For this project, we limited to only 2 types of layers: Linear and Activation Functions (ReLU, Sigmoid, Tanh, LeakyReLU, Softmax) </p>
 </p>
 
 ### Output 
